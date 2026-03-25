@@ -37,8 +37,11 @@ def randomUserGenerator():
             "country": fake.country(),
             "plan": random.choice(plans),
             "monthly_fee": plans[user_plan],
-            "subscription_date": fake.date_between(start_date = '-1m')
-            "watch_hours_per_month": random.randint(10, 70)
+            "subscription_date": fake.date_between(start_date = '-1m'),
+            "watch_hours_per_month": random.randint(10, 70),
+            "is_active": 
+            "cancel_date"
+            "favorite_genre"   
             
           }  
     
