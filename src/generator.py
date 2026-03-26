@@ -31,7 +31,7 @@ def churn_users(subscription_date):
         return True, None
 
     
-
+#test
 def generate_user():
     subscription_date = fake.date_between(start_date='-1m')    
     is_active, cancel_date = churn_users(subscription_date)    

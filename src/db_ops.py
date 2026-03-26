@@ -1,5 +1,6 @@
 from src.config import collection
 import logging
+#test
 def insert_users(users_list):
     if not users_list:
         logging.warning("insert_users called with empty list")
