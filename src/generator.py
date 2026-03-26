@@ -3,15 +3,13 @@ from datetime import timedelta
 import random
 fake = Faker()
 
-usersList = []
-
-plans = {
-    "STANDARD_WITH_ADS": "7.99",
-    "STANDARD": "17.99",
-    "PREMIUM": "24.99"
+PLANS = {
+    "STANDARD_WITH_ADS": 7.99,
+    "STANDARD": 17.99,
+    "PREMIUM": 24.99
 }
 
-genres = [
+GENRES = [
     "Action",
     "Comedy",
     "Drama",
@@ -24,37 +22,36 @@ genres = [
     "Animation"
 ]
 
-def churnUsers(subscription_date):
-    is_Active_User = random.random()
-    if is_Active_User <= 0.8:
+def churn_users(subscription_date):
+    is_active_user = random.random()
+    if is_active_user <= 0.2:
         days_after = timedelta(days=random.randint(1, 30))
-        return f"canceled on {subscription_date + days_after}"
+        return False, subscription_date + days_after
     else:
-        return "subscribed"
+        return True, None
 
-
-
-def randomUserGenerator():
-      for _ in range(1000):
-        user_plan = random.choice(list(plans.keys()))
-        subscription_date = fake.date_between(start_date='-1m')
-        user = {
-            "name": fake.name(),
-            "email": fake.email(),
-            "age": random.randint(18,80),
-            "country": fake.country(),
-            "plan": user_plan,
-            "monthly_fee": plans[user_plan],
-            "subscription_date": str(subscription_date),
-            "watch_hours_per_month": random.randint(10, 70),
-            "is_active": churnUsers(subscription_date),
-            "favorite_genre": random.choice(genres)
-          }
-        usersList.append(user)
     
-randomUserGenerator()
 
-for user in usersList:
-    print(user)
+def generate_user():
+    subscription_date = fake.date_between(start_date='-1m')    
+    is_active, cancel_date = churn_users(subscription_date)    
+    user_plan = random.choice(list(PLANS.keys()))
+    user = {
+        "name": fake.name(),
+        "email": fake.email(),
+        "age": random.randint(18,80),
+        "country": fake.country(),
+        "plan": user_plan,
+        "monthly_fee": PLANS[user_plan],
+        "subscription_date": str(subscription_date),
+        "watch_hours_per_month": random.randint(10, 70),
+        "is_active": is_active,
+        "cancel_date": str(cancel_date) if cancel_date else None,
+        "favorite_genre": random.choice(GENRES)
+        }
+    return user
+    
+def random_users_generator(n=3):
+    return[generate_user() for _ in range(n)]
 
 
