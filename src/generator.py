@@ -51,7 +51,7 @@ def generate_user():
         }
     return user
     
-def random_users_generator(n=3):
+def random_users_generator(n):
     return[generate_user() for _ in range(n)]
 
-
+users_list = random_users_generator(1000)
