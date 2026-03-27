@@ -1,6 +1,8 @@
 from faker import Faker
 from datetime import timedelta
 import random
+
+
 fake = Faker()
 
 PLANS = {
@@ -22,6 +24,7 @@ GENRES = [
     "Animation"
 ]
 
+
 def churn_users(subscription_date):
     is_active_user = random.random()
     if is_active_user <= 0.2:
@@ -30,16 +33,15 @@ def churn_users(subscription_date):
     else:
         return True, None
 
-    
-#test
+
 def generate_user():
-    subscription_date = fake.date_between(start_date='-1m')    
-    is_active, cancel_date = churn_users(subscription_date)    
+    subscription_date = fake.date_between(start_date='-1m')
+    is_active, cancel_date = churn_users(subscription_date)
     user_plan = random.choice(list(PLANS.keys()))
     user = {
         "name": fake.name(),
         "email": fake.email(),
-        "age": random.randint(18,80),
+        "age": random.randint(18, 80),
         "country": fake.country(),
         "plan": user_plan,
         "monthly_fee": PLANS[user_plan],
@@ -48,10 +50,9 @@ def generate_user():
         "is_active": is_active,
         "cancel_date": str(cancel_date) if cancel_date else None,
         "favorite_genre": random.choice(GENRES)
-        }
+    }
     return user
-    
-def random_users_generator(n):
-    return[generate_user() for _ in range(n)]
 
-users_list = random_users_generator(1000)
+
+def random_users_generator(n):
+    return [generate_user() for _ in range(n)]
