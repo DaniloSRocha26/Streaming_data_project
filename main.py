@@ -1,4 +1,5 @@
 import logging
+import os
 import sys
 from src.generator import random_users_generator
 from src.db_ops import insert_users, clear_collection
@@ -23,7 +24,11 @@ if __name__ == "__main__":
 
     df = load_data()
     logging.info(df.columns)
-
+    
+    path = os.path.join("reports", "data.csv")
+    df.to_csv(path, index=False, encoding="utf-8")
+    logger.info(f"CSV saved in: {path}")
+    
     revenue_by_plan(df)
     revenue_by_genre(df)
     churn_by_plan(df)
@@ -31,3 +36,6 @@ if __name__ == "__main__":
     avg_watch_hours_by_plan(df)
 
     logger.info("Pipeline complete")
+    
+
+    
