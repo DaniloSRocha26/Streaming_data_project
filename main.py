@@ -19,7 +19,7 @@ if __name__ == "__main__":
     logger.info("Starting data pipeline")
 
     clear_collection()
-    users_list = random_users_generator(1000)
+    users_list = random_users_generator(10000)
     insert_users(users_list)
 
     df = load_data()
