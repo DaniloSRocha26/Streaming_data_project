@@ -43,7 +43,7 @@ def churn_by_plan(df):
     return total_users, subscribed_count, churned_count, total_users_by_plan, churned_count_by_plan
 
 
-def age_distribuition(df):
+def age_distribution(df):
     bins = [17, 25, 35, 45, 54, 64, 81]
     labels = ["18-25", "26-35", "36-45", "46-54", "55-64", "65-80"]
 
