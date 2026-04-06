@@ -1,4 +1,6 @@
 from pymongo import MongoClient
+import logging
+from pymongo.errors import ConnectionFailure
 from dotenv import load_dotenv
 import os
 
@@ -7,7 +9,14 @@ import os
 load_dotenv()
 
 mongo_uri = os.getenv("MONGO_URI")
-client = MongoClient(mongo_uri)
+if mongo_uri == None:
+    raise EnvironmentError("mongo_uri is None")
+
+try:
+    client = MongoClient(mongo_uri)
+except ConnectionFailure:
+    logging.error("Error to connect to client")
+    raise
 
 
 database = client["Streaming_Data"]
