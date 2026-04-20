@@ -22,7 +22,7 @@ def clear_collection():
         collection.delete_many({})
         logging.info("All users deleted")
     except PyMongoError:
-        logging.error("Failed to Delet users")
+        logging.error("Delete")
         raise
 
 def get_all_users():
