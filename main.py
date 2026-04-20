@@ -26,7 +26,7 @@ if __name__ == "__main__":
         now = datetime.now()
         
         ct = now.strftime("%m-%d-%Y_%H-%M-%S")
-        logger.info(f"current time:, {ct}")
+        logger.info(f"current time: {ct}")
 
         clear_collection()
         users_list = random_users_generator(10000)
